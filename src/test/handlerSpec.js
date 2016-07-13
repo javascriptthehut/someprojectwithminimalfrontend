@@ -1,0 +1,6 @@
+/*
+Serves index.html
+creates new tweet
+lists latest tweets
+search tweets
+*/
