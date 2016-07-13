@@ -22,7 +22,7 @@ function publicURL(req, res){
 
 /* the get method comes from client side(fronend) in js */
 function get(req, res){
-  const queryString = '';
+  const queryString = 'SELECT * from tweets';
   client.query(queryString, (err, res) => {
 
     const json = JSON.stringify('data');
