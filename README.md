@@ -22,3 +22,12 @@ CREATE TABLE tweets (
 <!-- INSERT INTO users (username, name, password) VALUES ('Cameron', 'Knob', 'knobhead');
 
 INSERT INTO tweets (username, message, msgtime) VALUES ('Cameron', 'I have left!', 246379863); -->
+
+<!--
+button for create user
+
+-->
+
+<!-- SELECT * FROM users
+WHERE password = 'knobhead'
+AND username = 'Cameron'; -->

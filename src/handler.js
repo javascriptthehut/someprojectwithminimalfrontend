@@ -9,8 +9,8 @@ function handler(req, res) {
     urlpaths.publicURL(req, res);
   } else if (url.includes('get')){
     urlpaths.get(req, res);
-  } else if (url.includes('post')){
-    urlpaths.post(req, res);
+  } else if (url.includes('logon')){
+    urlpaths.logon(req, res);
   } else {
     res.writeHead(404);
     res.end('arghhh!');
