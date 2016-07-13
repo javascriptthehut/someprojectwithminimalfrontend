@@ -33,7 +33,7 @@ function get(req, res){
   });
 }
 
-function post(req, res){
+function logon(req, res){
   let body = '';
   req.on('data', (data) => {
     body += data; //data comes in bits, in a stream. every bit that comes id then added to the body. the empty string will stringefy the data (which may come as buffer)
@@ -42,10 +42,15 @@ function post(req, res){
     }
   });
   req.on('end', () => {
-    const postData = qs.parse(body);  //parsing from a query string (body) into an object
-    console.log(postData, 'posted');
-    res.writeHead(200, {'Content-Type': 'text/plain'});
-    res.end('posted');
+    const postData = qs.parse(body);  //{username: username, password: password}
+    const queryString = `SELECT * FROM users
+                         WHERE password = $1::chkpass
+                         AND username = $2::varchar`;
+    const parameters = [postData.username, postData.password];
+
+    client.query(queryString, parameters, (err, res) => {
+      
+    });
   });
 }
 
@@ -53,5 +58,5 @@ module.exports = {
   index: index,
   publicURL: publicURL,
   get: get,
-  post: post,
+  logon: logon,
 };
