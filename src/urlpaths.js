@@ -1,6 +1,6 @@
 const fs = require('fs');
 const qs = require('querystring');
-const psql = require('./psql.js');
+const client = require('./psql.js');
 
 function index(req, res) {
   fs.readFile(`${__dirname}/../public/index.html`, (err, data) => {
@@ -22,8 +22,13 @@ function publicURL(req, res){
 
 /* the get method comes from client side(fronend) in js */
 function get(req, res){
-  res.writeHead(200, {'Content-Type': 'application/json'});
-  res.end('');
+  const queryString = '';
+  client.query(queryString, (err, res) => {
+
+    const json = JSON.stringify('data');
+    res.writeHead(200, {'Content-Type': 'application/json'});
+    res.end(json);
+  });
 }
 
 function post(req, res){

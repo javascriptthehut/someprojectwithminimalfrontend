@@ -13,8 +13,6 @@ client.connect((err) => {
   if (err) throw err;
   console.log(`connected to ${DB}`);
 });
-client.query('SELECT id, name FROM users', (err, res) => {
-  if (err) throw err; 
-  console.log(res);
-  client.end();
-});
+
+module.exports = client;
+
