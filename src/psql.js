@@ -1,7 +1,7 @@
 const pg = require('pg');
-let DB = ''; 
+let DB = '';
 if (process.env.DATABASE_URL){      //heroku
-  DB = process.env.DATABASE_URL; 
+  DB = process.env.DATABASE_URL;
   pg.defaults.ssl = true;
 } else {                            //local
   DB = 'postgres:///tweetdb';
@@ -15,4 +15,3 @@ client.connect((err) => {
 });
 
 module.exports = client;
-
