@@ -22,10 +22,12 @@ function publicURL(req, res){
 
 /* the get method comes from client side(fronend) in js */
 function get(req, res){
-  const queryString = 'SELECT * from tweets';
+  const queryString = `SELECT * FROM tweets
+                       ORDER BY msgtime DESC
+                       LIMIT 12`;
   client.query(queryString, (err, res) => {
 
-    const json = JSON.stringify('data');
+    const json = JSON.stringify(res.rows);
     res.writeHead(200, {'Content-Type': 'application/json'});
     res.end(json);
   });
