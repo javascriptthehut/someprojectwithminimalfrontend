@@ -1,0 +1,29 @@
+{
+  "name": "someprojectwithminimalfrontend",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start" : "nodemon src/server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/javascriptthehut/someprojectwithminimalfrontend.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/javascriptthehut/someprojectwithminimalfrontend/issues"
+  },
+  "homepage": "https://github.com/javascriptthehut/someprojectwithminimalfrontend#readme",
+  "devDependencies": {
+    "nodemon": "^1.9.2",
+    "shot": "^3.1.0",
+    "tape": "^4.6.0"
+  },
+  "dependencies": {
+    "env2": "^2.1.0",
+    "pg": "^6.0.2"
+  }
+}
