@@ -1,6 +1,6 @@
 const fs = require('fs');
-const http = require('http');
-const handler = require('./handler.js');
+const qs = require('querystring');
+const psql = require('./psql.js');
 
 function index(req, res) {
   fs.readFile(`${__dirname}/../public/index.html`, (err, data) => {
@@ -22,26 +22,8 @@ function publicURL(req, res){
 
 /* the get method comes from client side(fronend) in js */
 function get(req, res){
-  client.lrange('id:all', -13, -1, (err, lastThirteen) => { //the get method will give back an array from redis.
-    if (err) throw err;
-    const promises = lastThirteen.map((id) => {
-      return new Promise((resolve, reject) => {
-        client.hgetall('id:' + id, (error, hash)=>{
-          if (error) reject(error);
-          resolve(hash);
-        });
-      });
-    });
-
-    Promise.all(promises)
-      .then((hashArray)=>{
-        const json = JSON.stringify(hashArray);
-        res.writeHead(200, {'Content-Type': 'application/json'});
-        res.end(json);
-      }, (errors) => {
-        console.log(errors);
-      });
-  });
+  res.writeHead(200, {'Content-Type': 'application/json'});
+  res.end('');
 }
 
 function post(req, res){
@@ -55,21 +37,8 @@ function post(req, res){
   req.on('end', () => {
     const postData = qs.parse(body);  //parsing from a query string (body) into an object
     console.log(postData, 'posted');
-    client.lindex('id:all', -1, (err, reply) => { //getting the key(id:all), will get the value of that key. the lindex command gets the key form a list and a specific key
-      if (err) throw err;
-      if(!reply) {
-        reply = 0;
-      }
-      const data = Number(reply) + 1;
-      client.rpush('id:all', data);
-      client.hmset('id:' + data, postData, (rerr, HMreply) => {
-        if (rerr) throw rerr;
-        console.log(HMreply);
-        res.writeHead(200, {'Content-Type': 'text/plain'});
-        res.end(`post response: ${HMreply}`);
-      }); //hmset sets the key's value as a hash table.
-
-    });
+    res.writeHead(200, {'Content-Type': 'text/plain'});
+    res.end('posted');
   });
 }
 

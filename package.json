@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "nodemon src/test/handlerSpec.js",
+    "test": "node src/test/handlerSpec.js",
     "start" : "nodemon src/server.js"
   },
   "repository": {
