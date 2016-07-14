@@ -14,17 +14,4 @@ client.connect((err) => {
   console.log(`connected to ${DB}`);
 });
 
-const queryString = `SELECT * FROM users
-                     WHERE password = $1
-                     AND username = $2`;
-const postData = {
-  username: 'Cameron',
-  password: 'knobhead'
-};
-const parameters = [postData.password, postData.username];
-
-client.query(queryString, parameters, (err, res) => {
-  console.log(res.rows);
-});
-
 module.exports = client;
