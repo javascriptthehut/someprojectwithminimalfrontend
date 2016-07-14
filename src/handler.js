@@ -1,7 +1,8 @@
 const urlpaths = require('./urlpaths.js');
-
 function handler(req, res) {
   const url = req.url;
+
+  console.log('dafasd');
 
   if(url === '/'){
     urlpaths.index(req, res);
@@ -11,6 +12,8 @@ function handler(req, res) {
     urlpaths.get(req, res);
   } else if (url.includes('logon')){
     urlpaths.logon(req, res);
+  } else if (url.includes('post')){
+    urlpaths.post(req, res);
   } else {
     res.writeHead(404);
     res.end('arghhh!');

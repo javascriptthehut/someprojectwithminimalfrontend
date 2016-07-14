@@ -23,9 +23,9 @@ const textButton = document.createTextNode('submit tweet');
 
 button.appendChild(text);
 button.addEventListener('click', e => {
-  const user = document.querySelectorAll('input')[0].value;
-  const password = document.querySelectorAll('input')[1].value;
-  login(user, password);
+  const username = document.querySelectorAll('input')[0].value;
+  const pass = document.querySelectorAll('input')[1].value;
+  login(username, pass);
 });
 
 tweetButton.appendChild(textButton);
