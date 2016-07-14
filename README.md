@@ -5,7 +5,7 @@
 ```bash
 createdb tweetdb
 psql tweetdb
-CREATE EXTENSION chkpass
+CREATE EXTENSION chkpass;
 CREATE TABLE users (
   username  varchar(20)  primary key  not null,
   name      varchar(50)               not null,

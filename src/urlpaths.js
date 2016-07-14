@@ -53,7 +53,7 @@ function logon(req, res){
 
     client.query(queryString, parameters, (err, response) => {
       if(response.rows.length === 0){
-        res.writeHead(200, {'Content-Type': 'text/plain'});
+        res.writeHead(403, {'Content-Type': 'text/plain'});
         res.end('User and password combination wrong!');
       } else {
         const token = uuid.v4();
@@ -86,7 +86,7 @@ function post(req, res){
         res.end('tweet posted');
       });
     } else {
-      res.writeHead(200, {'Content-Type': 'text/plain'});
+      res.writeHead(403, {'Content-Type': 'text/plain'});
       res.end('not logged in');
     }
   });
