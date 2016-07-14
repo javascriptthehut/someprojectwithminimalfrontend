@@ -1,8 +1,8 @@
 const urlpaths = require('./urlpaths.js');
-function handler(req, res) {
-  const url = req.url;
 
-  console.log('dafasd');
+function handler(req, res) {
+
+  const url = req.url;
 
   if(url === '/'){
     urlpaths.index(req, res);
