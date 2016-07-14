@@ -87,7 +87,7 @@ function get(){
 }
 
 const updateDom = (array) => {
-  // removeChildren();
+  removeChildren();
   for(let i =0; i < array.length; i++) {
     let tweet = array[i].message;
     console.log(tweet);
@@ -97,12 +97,12 @@ const updateDom = (array) => {
     document.body.appendChild(p);
   };
 };
-//
-// function removeChildren () {
-// let tweets = document.getElementsByTagName('p');
-// for (let j = 0; j < tweets.length; j++) {
-//
-// }
-// }
+
+function removeChildren () {
+  let tweets = document.getElementsByTagName('p');
+  for (let j = 0; j < tweets.length; j++) {
+    document.body.removeChild(tweets[j]);
+  }
+}
 
 window.onload = get();
