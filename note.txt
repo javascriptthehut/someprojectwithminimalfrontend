@@ -1,0 +1,17 @@
+ would choose this simple solution.
+
+Summarizing it:
+
+Client "I want to login"
+Server generates a random number #S and sends it to the Client
+Client
+reads username and password typed by the user
+calculates the hash of the password, getting h(pw) (which is what is stored in the DB)
+generates another random number #C
+concatenates h(pw) + #S + #C and calculates its hash, call it h(all)
+sends to the server username, #C and h(all)
+Server
+retrieves h(pw)' for the specified username, from the DB
+now it has all the elements to calculate h(all'), like Client did
+if h(all) = h(all') then h(pw) = h(pw)', almost certainly
+No one can repeat the request to log in as the specified user. #S adds a variable component to the hash, each time (it's fundamental). #C adds additional noise in it.

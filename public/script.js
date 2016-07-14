@@ -23,9 +23,9 @@ const textButton = document.createTextNode('submit tweet');
 
 button.appendChild(text);
 button.addEventListener('click', e => {
-  const user = document.querySelectorAll('input')[0].value;
-  const password = document.querySelectorAll('input')[1].value;
-  login(user, password);
+  const username = document.querySelectorAll('input')[0].value;
+  const pass = document.querySelectorAll('input')[1].value;
+  login(username, pass);
 });
 
 tweetButton.appendChild(textButton);
@@ -63,8 +63,46 @@ function submitTweet(tweet){
       alert(xhr.responseText);
     } else if (xhr.readyState === 4 && xhr.status === 200) {
       console.log(xhr.responseText);
+      get();
     }
   };
   xhr.open('post', '/post');
   xhr.send(`username=${user}&token=${token}&message=${tweet}`);
 }
+
+function get(){
+  let xhr = new XMLHttpRequest();
+  xhr.onreadystatechange = () => {
+    if(xhr.readyState === 4 && xhr.status === 403) {
+      alert(xhr.responseText);
+    } else if (xhr.readyState === 4 && xhr.status === 200) {
+      console.log(xhr.responseText);
+      let output = JSON.parse(xhr.responseText);
+      console.log(output);
+      updateDom(output);
+    }
+  };
+  xhr.open('get', '/get');
+  xhr.send();
+}
+
+const updateDom = (array) => {
+  removeChildren();
+  for(let i =0; i < array.length; i++) {
+    let tweet = array[i].message;
+    console.log(tweet);
+    let p = document.createElement('p');
+    let texta = document.createTextNode(tweet);
+    p.appendChild(texta);
+    document.body.appendChild(p);
+  };
+};
+
+function removeChildren () {
+  let tweets = document.getElementsByTagName('p');
+  for (let j = 0; j < tweets.length; j++) {
+    document.body.removeChild(tweets[j]);
+  }
+}
+
+window.onload = get();

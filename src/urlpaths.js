@@ -31,9 +31,12 @@ function get(req, res){
   const queryString = `SELECT * FROM tweets
                        ORDER BY msgtime DESC
                        LIMIT 12`;
-  client.query(queryString, (err, res) => {
+  client.query(queryString, (err, response) => {
 
     const json = JSON.stringify(res.rows);//get all the rows requested and JSON it.
+
+    const json = JSON.stringify(response.rows);
+
     res.writeHead(200, {'Content-Type': 'application/json'});
     res.end(json);
   });
@@ -105,4 +108,5 @@ module.exports = {
   publicURL: publicURL,
   get: get,
   logon: logon,
+  post: post,
 };
