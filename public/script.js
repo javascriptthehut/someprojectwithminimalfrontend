@@ -63,8 +63,46 @@ function submitTweet(tweet){
       alert(xhr.responseText);
     } else if (xhr.readyState === 4 && xhr.status === 200) {
       console.log(xhr.responseText);
+      get();
     }
   };
   xhr.open('post', '/post');
   xhr.send(`username=${user}&token=${token}&message=${tweet}`);
 }
+
+function get(){
+  let xhr = new XMLHttpRequest();
+  xhr.onreadystatechange = () => {
+    if(xhr.readyState === 4 && xhr.status === 403) {
+      alert(xhr.responseText);
+    } else if (xhr.readyState === 4 && xhr.status === 200) {
+      console.log(xhr.responseText);
+      let output = JSON.parse(xhr.responseText);
+      console.log(output);
+      updateDom(output);
+    }
+  };
+  xhr.open('get', '/get');
+  xhr.send();
+}
+
+const updateDom = (array) => {
+  // removeChildren();
+  for(let i =0; i < array.length; i++) {
+    let tweet = array[i].message;
+    console.log(tweet);
+    let p = document.createElement('p');
+    let texta = document.createTextNode(tweet);
+    p.appendChild(texta);
+    document.body.appendChild(p);
+  };
+};
+//
+// function removeChildren () {
+// let tweets = document.getElementsByTagName('p');
+// for (let j = 0; j < tweets.length; j++) {
+//
+// }
+// }
+
+window.onload = get();
