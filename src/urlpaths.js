@@ -32,10 +32,7 @@ function get(req, res){
                        ORDER BY msgtime DESC
                        LIMIT 12`;
   client.query(queryString, (err, response) => {
-
-    const json = JSON.stringify(res.rows);//get all the rows requested and JSON it.
-
-    const json = JSON.stringify(response.rows);
+    const json = JSON.stringify(response.rows);//get all the rows requested and JSON it.
 
     res.writeHead(200, {'Content-Type': 'application/json'});
     res.end(json);
