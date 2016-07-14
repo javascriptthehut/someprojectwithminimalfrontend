@@ -23,43 +23,51 @@ function publicURL(req, res){
   });
 }
 
-/* the get method comes from client side(fronend) in js */
+/* GET FROM DB: the query comes from the db in javascript (by using the pg module)
+into the server. server then needs to parse it into JSON so that it
+can send it to fronend
+*/
 function get(req, res){
   const queryString = `SELECT * FROM tweets
                        ORDER BY msgtime DESC
                        LIMIT 12`;
   client.query(queryString, (err, res) => {
 
-    const json = JSON.stringify(res.rows);
+    const json = JSON.stringify(res.rows);//get all the rows requested and JSON it.
     res.writeHead(200, {'Content-Type': 'application/json'});
     res.end(json);
   });
 }
 
-function logon(req, res){
-  let body = '';
+//login request
+/*db query checks if the login name and password corresponds to what exist in
+the database. the 'uuid' module generates a random token(string), */
+function logon(req, res){ //when the login is sent from fronend
+  let body = ''; //stringify the data from fronend
   req.on('data', (data) => {
     body += data; //data comes in bits, in a stream. every bit that comes id then added to the body. the empty string will stringefy the data (which may come as buffer)
     if(body.length > 1e6) { //if the amount of data is bigger then 1 million!
       req.connection.destroy(); //detroy the connection.
     }
   });
-  req.on('end', () => {
-    const postData = qs.parse(body);  //{username: username, password: password}
+  req.on('end', () => {//when data has all arrived then query db..
+    const postData = qs.parse(body);//parse from string to javascript, in this case an object = {username: username, password: password}
     const queryString = `SELECT * FROM users
                          WHERE username = $1
                          AND password = $2`;
-    const parameters = [postData.username, postData.password];
+    const parameters = [postData.username, postData.password];//match objects username and password
 
+//check first if username and password exist in db
     client.query(queryString, parameters, (err, response) => {
       if(response.rows.length === 0){
         res.writeHead(403, {'Content-Type': 'text/plain'});
         res.end('User and password combination wrong!');
       } else {
-        const token = uuid.v4();
-        tokens[postData.username] = token;
+        //if it does exist,
+        const token = uuid.v4(); //create a unique token,
+        tokens[postData.username] = token; //sets the token as the value of the username key
         res.writeHead(200, {'Content-Type': 'text/plain'});
-        res.end(token);
+        res.end(token);//respond with the created token
       }
     });
   });
