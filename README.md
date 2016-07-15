@@ -2,7 +2,39 @@
 
 ## Create database for local development
 
-```bash
+# someprojectwithminimalfrontend
+
+## Create database for local development
+
+##Why?
+We want to create a simple twitter-like functionality using postgres db. we decided to call it 'someprojectwithminimalfrontend' because we explicitly decided to concentrate mainly on the back-end and have the most minimal front-end possible. we have built the front-end html by using only js DOM element so that we can practice DOM manipulation. There is no css.
+
+It a fun exercise for us to learn:
+
+ * POSTGRES - a relational database
+ * how to inquire SQL databases
+ * creating a simple login functionality
+ * Joining two tables by reference
+ * Relation between db and server
+ * Data structures
+ * DOM manipulation
+ * More Node.js
+
+
+##What?
+
+It a very basic twiiter like application which recieves a login with username and password and then lets you post tweets for the duration of that session. you cannot post tweets if your login info is incorrect.
+The index page is done dynamically through DOM manipulation and has only three fields for login and tweet message.
+
+##How?
+
+We have build the database first by adding two tables- users and tweets. we then
+
+
+
+##commands to use on local bash in order to set up db:
+
+```
 createdb tweetdb
 psql tweetdb
 CREATE EXTENSION chkpass;
@@ -19,15 +51,10 @@ CREATE TABLE tweets (
   msgtime    bigint                                       not null
 );
 ```
-<!-- INSERT INTO users (username, name, password) VALUES ('Cameron', 'Knob', 'knobhead');
 
-INSERT INTO tweets (username, message, msgtime) VALUES ('Cameron', 'I have left!', 246379863); -->
-
-<!--
-button for create user
-
--->
-
-<!-- SELECT * FROM users
-WHERE password = 'knobhead'
-AND username = 'Cameron'; -->
+```
+ INSERT INTO users (username, name, password) VALUES ('fluffy', 'cat', 'biscuits');
+```
+```
+ INSERT INTO tweets (username, message, msgtime) VALUES ('fluffy', 'gimme food', 246379863); -->
+```
