@@ -1,6 +1,4 @@
-# someprojectwithminimalfrontend
 
-## Create database for local development
 
 # someprojectwithminimalfrontend
 
