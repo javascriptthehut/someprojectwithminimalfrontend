@@ -5,6 +5,7 @@ let user = '';
 
 const userName = document.createElement('input'); //username input field
 userName.type = 'text';
+userName.className = 'userInput';
 
 const password = document.createElement('input'); //password input field
 password.type = 'text';

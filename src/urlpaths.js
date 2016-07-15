@@ -15,7 +15,7 @@ function index(req, res) {
 
 function publicURL(req, res){
   const path = req.url.split('public')[1];
-  const ext = req.url.split('.')[3];
+  const ext = req.url.split('.').pop();
   fs.readFile(`${__dirname}/../public${path}`, (err, data) => {
     if (err) throw err;
     res.writeHead(200, {'Content-Type': `text/${ext}`});
@@ -66,13 +66,14 @@ function logon(req, res){ //when the login is sent from fronend
         //if it does exist,
         const token = uuid.v4(); //create a unique token,
         tokens[postData.username] = token; //sets the token as the value of the username key
-        res.writeHead(200, {'Content-Type': 'text/plain'});
-        res.end(token);//respond with the created token
+        res.writeHead(200, {'Content-Type': 'text/plain'});//write head of message
+        res.end(token);//respond with the created token which is now saved on server memory
       }
     });
   });
 }
 
+//function to add tweets into the db
 function post(req, res){
   let body = '';
   req.on('data', (data) => {
