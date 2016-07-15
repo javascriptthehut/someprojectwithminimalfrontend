@@ -26,8 +26,11 @@ The index page is done dynamically through DOM manipulation and has only three f
 
 ##How?
 
-We have build the database first by adding two tables- users and tweets. we then
-
+We have build the database first by adding two tables - users and tweets.
+The urlpath file contains all the handler path functions serving different files
+as well as querying the db. the data is then passed to the front-end every time an
+xhr request is fired. we then manipulate the DOM in order to display the input fields and
+tweets posted.
 
 
 ##commands to use on local bash in order to set up db:
