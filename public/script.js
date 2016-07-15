@@ -101,7 +101,7 @@ const updateDom = (array) => {
 function removeChildren () {
   let tweets = document.getElementsByTagName('p');
   console.log(tweets.length);
-  while(document.getElementsByTagName('p').length) {
+  while(tweets.length) {
     document.body.removeChild(document.body.lastChild);
   }
 }
