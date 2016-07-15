@@ -1,9 +1,14 @@
+//npm modules
 const fs = require('fs');
 const qs = require('querystring');
-const client = require('./psql.js');
 const uuid = require('uuid');
 
+//exports
+const client = require('./psql.js');
+
 const tokens = {};
+
+//handler(req, res): on request(do something) and then repond with header msg and body(data);
 
 //serves the index page
 function index(req, res) {

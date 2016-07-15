@@ -1,7 +1,7 @@
+//npm module to communicate with potgres server
+const pg = require('pg');
 
 //setting relation to postgres db
-
-const pg = require('pg');
 let DB = '';
 
 if (process.env.DATABASE_URL){      //heroku
