@@ -2,6 +2,8 @@
 
 # someprojectwithminimalfrontend
 
+See instructions at foot of page to run app. 
+
 ## Create database for local development
 
 ##Why?
@@ -52,10 +54,10 @@ CREATE TABLE tweets (
   msgtime    bigint                                       not null
 );
 ```
+In order to add tweets to the database you must first create a user with the following: 
 
 ```
  INSERT INTO users (username, name, password) VALUES ('fluffy', 'cat', 'biscuits');
 ```
-```
- INSERT INTO tweets (username, message, msgtime) VALUES ('fluffy', 'gimme food', 246379863); -->
-```
+
+Once a user has been created, insert username and password into the top two fields and press login. You can now type tweets in the lowest field and press the submit button to update the list. 
